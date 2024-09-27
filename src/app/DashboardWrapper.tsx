@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Navbar from '@/app/(components)/Navbar';
 
 
 export default function DashboardWrapper({ children }: { children: React.ReactNode}) {
@@ -9,6 +10,7 @@ export default function DashboardWrapper({ children }: { children: React.ReactNo
         <main 
           className= {`dark:bg-dark-bg flex w-full flex-col bg-gray-50 md:pl-64`}
           > 
+            <Navbar />
             {children}
         
         </main>
