@@ -36,7 +36,7 @@ useEffect(()=>{
 const DashboardWrapper = ({ children }: { children: React.ReactNode}) =>{
     return(
         <StoreProvider> 
-            <DashboardLayout> </DashboardLayout>
+            <DashboardLayout> {children} </DashboardLayout>
         </StoreProvider> 
     )
 }
