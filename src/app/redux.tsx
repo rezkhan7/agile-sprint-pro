@@ -44,6 +44,7 @@ const storage =
     : createWebStorage("local");
 
 const persistConfig = {
+  timeout:100, 
   key: "root",
   storage,
   whitelist: ["global"],
