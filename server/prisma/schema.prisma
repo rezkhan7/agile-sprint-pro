@@ -13,3 +13,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User{
+  userId Int @id @default(autoincrement())
+  cognitoId String @unique
+  username String @unique
+  profilePictureUrl String?
+  teamId Int?
+
+  authoredTasks Task[] @relations("TaskAuthor")
+  assignedTasks Task[] @relations("TaskAssignee")
+  taskAssignment TaskAssignment[]
+  comments Comment[]
+  team Team? @relation(fields: [teamId], references: [id])
+}
+
+model Team{
+  id Int @id @default(autoincrement())
+  teamName String
+  productOwnerUserId Int?
+  projectManagerUserId Int?
+  projectTeams ProjectTeam[]
+  user User[]
+}
+
+model Project{
+  id Int @id @default(autoincrement())
+  name String
+  description String?
+  startDate DateTime?
+  endDate DateTime?
+  tasks Task[]
+  projectTeams ProjectTeam[]
+
+}
