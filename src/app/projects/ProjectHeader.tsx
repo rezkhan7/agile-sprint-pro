@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Header from "@/app/(components)/Header"
 
-type Props = {}
+type Props = {
+  activeTab: string;
+  setActiveTab: (tabName: string) => void
+}
 
-const ProjectHeader = (props: Props) => {
+const ProjectHeader = ({activeTab, setActiveTab}: Props) => {
+  const [isModalNewProjectOpen, setIsModalNewProjectOpen] = useState(false);
+
   return (
-    <div>ProjectHeader</div>
+    <div className='px-4 xl:px-6'>
+      <div className='pb-6 pt-6 lg:pb-4 lg:pt-8'>
+        <Header name= "Product Design Development"/>
+      </div>
+    </div>
   )
 }
 
