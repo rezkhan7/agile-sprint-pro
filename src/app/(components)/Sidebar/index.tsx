@@ -7,15 +7,18 @@ import { usePathname } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/app/redux';
 import Link from 'next/link';
 import { setIsSidebarCollapsed } from '@/state';
+import { useGetProjectsQuery, useGetTasksQuery } from '@/state/api';
 
 const Sidebar = () => {
   const [showProjects, setShowProjects] = useState(true);
   const [showPriority, setShowPriority] = useState(true);
   
- 
+  const { data: projects } = useGetProjectsQuery();
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector((state)=> state.global.isSidebarCollapsed)
   
+  console.log("Projects",projects)
+
   const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between 
     shadow-xl transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white
     ${isSidebarCollapsed ? 'w-0 hidden' : 'w-64'}
@@ -70,6 +73,17 @@ const Sidebar = () => {
             </button>
 
             {/* Projects List */}
+            {showProjects && projects?.map((project)=>(
+                <SidebarLink
+                  key = {project.id}
+                  icon = {Briefcase}
+                  label = {project.name}
+                  href = {`/projects/${project.id}`}
+                />
+            ))
+            
+        
+            }
             
             {/* Priorities Links */}
             <button onClick={()=> setShowPriority((prev) => !prev)}
